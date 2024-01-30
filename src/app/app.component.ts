@@ -8,8 +8,6 @@ import { PowerOfAttorneyComponent } from './components/power-of-attorney/power-o
   standalone: true,
   imports: [RouterOutlet, CustomersTableComponent, PowerOfAttorneyComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title: string = 'rabobank';
-}
+export class AppComponent {}
