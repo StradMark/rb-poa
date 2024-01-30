@@ -23,7 +23,7 @@ export class AddressFormComponent {
   }> = new EventEmitter();
 
   addressForm = this.formBuilder.group({
-    postalCode: ['', [Validators.required, this.dutchPostalCodeValidator()]],
+    postalCode: ['', [Validators.required, this.postalCodeValidator()]],
     houseNumber: ['', [Validators.required, this.houseNumberValidator()]],
   });
 
@@ -37,14 +37,14 @@ export class AddressFormComponent {
     return this.addressForm.get('houseNumber');
   }
 
-  dutchPostalCodeValidator(): ValidatorFn {
+  postalCodeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       // Regular expression for Dutch postal code (NL format)
       const postalCodeRegex = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
 
       const valid = postalCodeRegex.test(control.value);
 
-      return valid ? null : { dutchPostalCode: true };
+      return valid ? null : { postalCode: true };
     };
   }
 

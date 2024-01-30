@@ -8,7 +8,11 @@
     required
   />
   <div *ngIf="postalCode!.invalid && postalCode!.touched">
-    <div class="form-error" *ngIf="postalCode!.errors?.['dutchPostalCode']">
+    <div
+      id="postalcode-error"
+      class="form-error"
+      *ngIf="postalCode!.errors?.['postalCode']"
+    >
       Postal Code is of incorrect format (expect 0000XX).
     </div>
   </div>
@@ -22,10 +26,14 @@
     required
   />
   <div *ngIf="houseNumber!.invalid && houseNumber!.touched">
-    <div class="form-error" *ngIf="houseNumber!.errors?.['houseNumber']">
+    <div
+      id="housenumber-error"
+      class="form-error"
+      *ngIf="houseNumber!.errors?.['houseNumber']"
+    >
       House Number is of incorrect format (expect to start with a number).
     </div>
   </div>
 
-  <button class="btn btn-blue mt-2 " type="submit">Submit</button>
+  <button class="btn btn-blue mt-2" type="submit">Submit</button>
 </form>

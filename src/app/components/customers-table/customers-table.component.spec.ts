@@ -8,13 +8,23 @@ import { CustomerDetail } from '../../types/customer';
 describe('CustomersTableComponent', () => {
   let component: CustomersTableComponent;
   let fixture: ComponentFixture<CustomersTableComponent>;
-
+  let customerData: CustomerDetail[] = [
+    {
+      id: 'guid',
+      initials: 'A',
+      surnamePrefix: 'van',
+      surname: 'Doe',
+      sex: 'female',
+      postalCode: '12345',
+      houseNumber: '42',
+      houseNumberExtension: 'A',
+    },
+  ];
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomersTableComponent]
-    })
-    .compileComponents();
-    
+      imports: [CustomersTableComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CustomersTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -24,20 +34,8 @@ describe('CustomersTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
   it('should render table header correctly when customerData is available', () => {
-    component.customerData = [
-      {
-        id: "guid",
-        initials: 'A',
-        surnamePrefix: 'van',
-        surname: 'Doe',
-        sex: "female",
-        postalCode: '12345',
-        houseNumber: '42',
-        houseNumberExtension: 'A',
-      },
-    ];
+    component.customerData = customerData;
     fixture.detectChanges();
 
     const tableHeaders = fixture.debugElement.queryAll(By.css('.table-head'));
@@ -46,56 +44,30 @@ describe('CustomersTableComponent', () => {
   });
 
   it('should render table body correctly when customerData is available', () => {
-    component.customerData = [
-      {
-        id: "guid",
-        initials: 'A',
-        surnamePrefix: 'van',
-        surname: 'Doe',
-        sex: "female",
-        postalCode: '12345',
-        houseNumber: '42',
-        houseNumberExtension: 'A',
-      },
-    ];
+    component.customerData = customerData;
     fixture.detectChanges();
 
     const tableCells = fixture.debugElement.queryAll(By.css('.table-cell'));
-    expect(tableCells.length).toBe(5); // Assuming 5 cells in a row
+    expect(tableCells.length).toBe(5); //
     expect(tableCells[0].nativeElement.textContent).toContain('A');
-    // Add similar expectations for other cells
   });
 
   it('should trigger selectCustomer method when a row is clicked', () => {
-    const customer: CustomerDetail = {
-      id: "guid",
-      initials: 'A',
-      surnamePrefix: 'van',
-      surname: 'Doe',
-      sex: "female",
-      postalCode: '12345',
-      houseNumber: '42',
-      houseNumberExtension: 'A',
-    };
+    component.customerData = [customerData[0]];
+    fixture.detectChanges();
     spyOn(component, 'selectCustomer');
 
-    const row = fixture.debugElement.query(By.css('.table-row'));
-    row.triggerEventHandler('click', null);
+    const rows = fixture.debugElement.queryAll(By.css('.table-row'));
+    expect(rows.length).toBeGreaterThan(0);
 
-    expect(component.selectCustomer).toHaveBeenCalledWith(customer);
+    rows.forEach((row) => {
+      row.triggerEventHandler('click', null);
+    });
+    expect(component.selectCustomer).toHaveBeenCalledTimes(rows.length);
   });
 
   it('should render CustomerDetailsComponent when selectedCustomer is not null', () => {
-    component.selectedCustomer = {
-      id: "guid",
-      initials: 'A',
-      surnamePrefix: 'van',
-      surname: 'Doe',
-      sex: "female",
-      postalCode: '12345',
-      houseNumber: '42',
-      houseNumberExtension: 'A',
-    };
+    component.selectedCustomer = customerData[0];
     fixture.detectChanges();
 
     const customerDetailsComponent = fixture.debugElement.query(

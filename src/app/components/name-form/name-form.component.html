@@ -2,7 +2,7 @@
   <label class="form-label" for="name">Name: </label>
   <input class="form-input" id="name" type="text" formControlName="name" required />
   <div *ngIf="name!.invalid && name!.touched" class="alert alert-danger">
-    <div class="form-error" *ngIf="name!.errors?.['required']">Name is required</div>
+    <div id="name-error" class="form-error" *ngIf="name!.errors?.['required']">Name is required</div>
   </div>
 
   <button class="btn btn-blue mt-2" type="submit">Submit</button>
