@@ -1,0 +1,31 @@
+<form [formGroup]="addressForm" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+  <label class="form-label" for="postal-code">Postal Code: </label>
+  <input
+    class="form-input"
+    id="postal-code"
+    type="text"
+    formControlName="postalCode"
+    required
+  />
+  <div *ngIf="postalCode!.invalid && postalCode!.touched">
+    <div class="form-error" *ngIf="postalCode!.errors?.['dutchPostalCode']">
+      Postal Code is of incorrect format (expect 0000XX).
+    </div>
+  </div>
+
+  <label class="form-label" for="house-number">House Number: </label>
+  <input
+    class="form-input"
+    id="house-number"
+    type="text"
+    formControlName="houseNumber"
+    required
+  />
+  <div *ngIf="houseNumber!.invalid && houseNumber!.touched">
+    <div class="form-error" *ngIf="houseNumber!.errors?.['houseNumber']">
+      House Number is of incorrect format (expect to start with a number).
+    </div>
+  </div>
+
+  <button class="btn btn-blue mt-2 " type="submit">Submit</button>
+</form>

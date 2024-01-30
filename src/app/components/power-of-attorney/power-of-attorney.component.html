@@ -1,0 +1,50 @@
+<div class="container mx-auto">
+  <div class="max-w-2xl mx-auto mt-4">
+    <ul role="tablist" class="flex">
+      <button
+        *ngFor="let tab of tabs"
+        role="tab"
+        class="tab-button"
+        [attr.id]="[tab.id]"
+        [attr.aria-controls]="tab.id"
+        [attr.aria-selected]="selectedTab === tab.id"
+        [class.border-blue-500]="selectedTab === tab.id"
+        [class.text-blue-500]="selectedTab === tab.id"
+        (click)="selectTab(tab.id)"
+      >
+        {{ tab.displayName }}
+      </button>
+    </ul>
+
+    <div class="bg-white p-4 border rounded-b-md">
+      <div
+        *ngIf="selectedTab === tabs[0].id"
+        role="tabpanel"
+        [attr.aria-labelledby]="tabs[0].id"
+      >
+        <app-address-form (submitForm)="getCustomerData($event)" />
+      </div>
+      <div
+        *ngIf="selectedTab === tabs[1].id"
+        role="tabpanel"
+        [attr.aria-labelledby]="tabs[1].id"
+      >
+        <app-name-form (submitForm)="getCustomerData($event)" />
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loadingCustomerData" class="loading-message">
+    Looking up customers...
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+    role="alert"
+  >
+    <span class="block sm:inline">{{ errorMessage }}</span>
+  </div>
+
+  <app-customers-table [customerData]="customerData" />
+</div>

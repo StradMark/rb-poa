@@ -1,0 +1,41 @@
+<table class="table" *ngIf="customerData.length > 0 && !selectedCustomer">
+  <thead>
+    <tr>
+      <th class="table-head">Voorletters</th>
+      <th class="table-head">Achternaam</th>
+      <th class="table-head">Postcode</th>
+      <th class="table-head">Huisnummer</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr
+      class="table-row"
+      *ngFor="let customer of customerData"
+      (click)="selectCustomer(customer)"
+    >
+      <td class="table-cell">
+        {{ customer.initials }}
+      </td>
+      <td class="table-cell">
+        {{ customer.surnamePrefix }} {{ customer.surname }}
+      </td>
+      <td class="table-cell">
+        {{ customer.postalCode }}
+      </td>
+      <td class="table-cell">
+        {{ customer.houseNumber }}{{ customer.houseNumberExtension }}
+      </td>
+      <td>
+        <button class="btn btn-blue" (click)="selectCustomer(customer)">
+          Select
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-customer-details
+  [customer]="selectedCustomer"
+  (closeSelected)="handleCloseDetails()"
+></app-customer-details>

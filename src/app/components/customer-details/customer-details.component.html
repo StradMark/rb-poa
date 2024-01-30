@@ -1,0 +1,30 @@
+<div
+  *ngIf="customer"
+  class="bg-white p-4 border rounded-b-md max-w-2xl mx-auto mt-4"
+>
+  <div class="flex flex-col">
+    <span class="text-xl font-bold mb-4">
+      {{ customer.initials }}. {{ customer.surnamePrefix }}
+      {{ customer.surname }}
+    </span>
+    <span *ngIf="customer.sex">Sex: {{ customer.sex }}</span>
+    <span *ngIf="customer.birthDate"
+      >Date of birth: {{ customer.birthDate }}</span
+    >
+    <div class="flex flex-col mt-2" *ngIf="customer.streetName">
+      <span class="font-semibold text-lg">Address:</span>
+      <span
+        >Street: {{ customer.streetName }} {{ customer.houseNumber
+        }}{{ customer.houseNumberExtension }}
+      </span>
+    </div>
+    <div class="flex flex-col">
+      <span>Postal code: {{ customer.postalCode }}</span>
+      <span *ngIf="!customer.streetName"
+        >House number: {{ customer.houseNumber }}
+        {{ customer.houseNumberExtension }}
+      </span>
+    </div>
+    <button class="inline btn btn-blue mt-4" (click)="emitClose()">Close</button>
+  </div>
+</div>
