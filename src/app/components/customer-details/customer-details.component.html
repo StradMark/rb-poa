@@ -7,7 +7,10 @@
       {{ customer.initials }}. {{ customer.surnamePrefix }}
       {{ customer.surname }}
     </span>
-    <span *ngIf="customer.sex">Sex: {{ customer.sex }}</span>
+    <span>
+      <span>Sex: </span>
+      {{ customer.sex }}</span
+    >
     <span *ngIf="customer.birthDate"
       >Date of birth: {{ customer.birthDate }}</span
     >
@@ -25,6 +28,8 @@
         {{ customer.houseNumberExtension }}
       </span>
     </div>
-    <button class="inline btn btn-blue mt-4" (click)="emitClose()">Close</button>
+    <button class="inline btn btn-blue mt-4" (click)="emitClose()">
+      Close
+    </button>
   </div>
 </div>
