@@ -1,11 +1,11 @@
 <table class="table" *ngIf="customerData.length > 0 && !selectedCustomer">
   <thead>
     <tr>
-      <th class="table-head">Initials</th>
+      <th class="table-head hidden sm:table-cell">Initials</th>
       <th class="table-head">Name</th>
       <th class="table-head">Postal Code</th>
       <th class="table-head">House number</th>
-      <th class="table-head"></th>
+      <th class="table-head hidden sm:table-cell"></th>
     </tr>
   </thead>
   <tbody class="table-body">
@@ -14,7 +14,7 @@
       *ngFor="let customer of customerData"
       (click)="selectCustomer(customer)"
     >
-      <td class="table-cell">
+      <td class="table-cell hidden sm:table-cell">
         {{ customer.initials }}
       </td>
       <td class="table-cell">
@@ -26,7 +26,7 @@
       <td class="table-cell">
         {{ customer.houseNumber }}{{ customer.houseNumberExtension }}
       </td>
-      <td class="table-cell">
+      <td class="table-cell hidden sm:table-cell">
         <button class="btn btn-blue" (click)="selectCustomer(customer)">
           Select
         </button>
