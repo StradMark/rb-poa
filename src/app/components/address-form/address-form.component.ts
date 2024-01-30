@@ -39,9 +39,8 @@ export class AddressFormComponent {
 
   postalCodeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      // Regular expression for Dutch postal code (NL format)
+      // Regular expression for Dutch postal code (NL format), can make variable in future
       const postalCodeRegex = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
-
       const valid = postalCodeRegex.test(control.value);
 
       return valid ? null : { postalCode: true };
@@ -50,9 +49,7 @@ export class AddressFormComponent {
 
   houseNumberValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      // Regular expression for Dutch postal code (NL format)
       const houseNumberRegex = /[0-9].*/;
-
       const valid = houseNumberRegex.test(control.value);
 
       return valid ? null : { houseNumber: true };
